@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Custom Styles for Creators Catalog Project */
 
 /* Header styling */
@@ -201,4 +202,174 @@ td {
 /* Стиль для порожніх клітинок */
 .text-gray-400 {
     letter-spacing: 2px;
+=======
+body{
+font-family: Arial, sans-serif;
+margin:0;
+background:#f4f6fb;
+color:#333;
+}
+
+/* HEADER */
+
+header{
+background:linear-gradient(135deg,#4a6cff,#6f86ff);
+color:white;
+text-align:center;
+padding:60px 20px;
+}
+
+header h1{
+font-size:40px;
+margin-bottom:10px;
+}
+
+/* NAVIGATION */
+
+nav{
+background:white;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+padding:15px;
+text-align:center;
+}
+
+nav a{
+margin:0 20px;
+text-decoration:none;
+color:#333;
+font-weight:bold;
+}
+
+/* SECTIONS */
+
+section{
+padding:60px 10%;
+}
+
+h2{
+text-align:center;
+margin-bottom:40px;
+font-size:28px;
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+}
+
+/* CARD */
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.avatar{
+width:70px;
+height:70px;
+border-radius:50%;
+object-fit:cover;
+margin-bottom:15px;
+}
+
+
+/* PORTFOLIO */
+
+.work{
+height:160px;
+background:#ddd;
+border-radius:8px;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th, td{
+border:1px solid #ddd;
+padding:10px;
+}
+
+th{
+background:#4a6cff;
+color:white;
+}
+
+/* FOOTER */
+
+footer{
+background:#111;
+color:white;
+text-align:center;
+padding:30px;
+margin-top:40px;
+}
+
+.btn-reflect {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #4a6cff; /* Зеленый цвет */
+    color: white;
+    text-decoration: none; /* Убираем подчеркивание */
+    border-radius: 8px; /* Закругленные углы */
+    font-weight: bold;
+    transition: background-color 0.3s; /* Плавный переход цвета */
+}
+
+.btn-reflect:hover {
+    background-color: #9ba8df; /* Цвет при наведении */
+}
+
+/* Секция для кнопки SRS */
+.srs-section {
+    text-align: center;
+    margin: 50px 0;
+}
+
+/* Кнопка SRS */
+.btn-srs {
+    display: inline-flex;
+    align-items: center;
+    padding: 18px 40px;
+    background-color: #4a6cff;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 10px 25px rgba(110, 142, 251, 0.4);
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-srs .icon {
+    margin-right: 12px;
+    font-size: 20px;
+}
+
+.btn-srs:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(110, 142, 251, 0.6);
+    filter: brightness(1.1);
+}
+
+.btn-srs:active {
+    transform: translateY(-1px);
+>>>>>>> be0dfa111588cdfbafc9751d7a3c636a92428db6
 }

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>SRS Document — Cratlog</title>
+    <link rel="stylesheet" href="srs.css">
+</head>
+<body>
+
+<div class="srs-container">
+    <a href="index.html" class="back-link">← Повернутися на головну</a>
+
+    <header class="srs-header">
+        <h1>Software Requirements Specification (SRS)</h1>
+        <table class="meta-table">
+            <tr><td><b>Назва проєкту</b></td><td>Cratlog</td></tr>
+            <tr><td><b>Версія документа</b></td><td>v1.0</td></tr>
+            <tr><td><b>Дата</b></td><td>11.03.2026</td></tr>
+            <tr><td><b>Команда</b></td><td>Євсович, Мізіна, Яцюк</td></tr>
+            <tr><td><b>Замовник</b></td><td>Product Owner (Startup Client) EKahoot</td></tr>
+        </table>
+    </header>
+
+    <nav class="toc">
+        <h2>ЗМІСТ (TABLE OF CONTENTS)</h2>
+        <ol>
+            <li><a href="#section1">ВСТУП (INTRODUCTION)</a></li>
+            <li><a href="#section2">ЗАГАЛЬНИЙ ОПИС (OVERALL DESCRIPTION)</a></li>
+            <li><a href="#section3">ФУНКЦІОНАЛЬНІ ВИМОГИ (FUNCTIONAL REQUIREMENTS)</a></li>
+            <li><a href="#section4">НЕФУНКЦІОНАЛЬНІ ВИМОГИ (NON-FUNCTIONAL REQUIREMENTS)</a></li>
+            <li><a href="#section5">ОБМЕЖЕННЯ (CONSTRAINTS)</a></li>
+            <li><a href="#section6">ГЛОСАРІЙ (GLOSSARY)</a></li>
+            <li><a href="#section7">МАТРИЦЯ ВІДСТЕЖУВАНОСТІ (TRACEABILITY MATRIX)</a></li>
+        </ol>
+    </nav>
+
+    <section id="section1">
+        <h2>1. ВСТУП (INTRODUCTION)</h2>
+        <p>Система є веб-платформою-агрегатором, яка збирає та структурує сучасні інструменти для дизайнерів і веб-розробників.</p>
+        <p>Основна проблема, яку вирішує система, — це інформаційний шум та велика кількість нових AI-інструментів і сервісів, серед яких складно знайти якісні та перевірені ресурси.</p>
+        <p>Кінцевими користувачами системи є:</p>
+        <ul>
+            <li>дизайнери</li>
+            <li>веб-розробники</li>
+            <li>контент-мейкери</li>
+            <li>креативні спеціалісти</li>
+        </ul>
+        <p>Основна аудиторія користувачів — люди віком приблизно 20–40 років із середнім або високим рівнем технічної підготовки, які регулярно працюють із цифровими інструментами та шукають нові рішення для підвищення ефективності своєї роботи.</p>
+    </section>
+
+    <section id="section2">
+        <h2>2. ЗАГАЛЬНИЙ ОПИС (OVERALL DESCRIPTION)</h2>
+        <h3>2.1 ОСНОВНІ ФУНКЦІОНАЛЬНІ БЛОКИ СИСТЕМИ</h3>
+        <ul>
+            <li>каталог креаторів</li>
+            <li>сторінка профілю креатора</li>
+            <li>портфоліо робіт</li>
+            <li>система пошуку та фільтрації</li>
+            <li>адміністративна панель</li>
+            <li>модуль аутентифікації користувачів</li>
+            <li>модуль управління контентом</li>
+        </ul>
+
+        <h3>2.2 ТИПИ АКТОРІВ ТА ЇХ РОЛІ</h3>
+        <p><strong>1. Незареєстрований користувач (Guest)</strong><br>
+        Може переглядати каталог ресурсів, здійснювати пошук і фільтрацію, а також переглядати картки ресурсів. Не має можливості зберігати ресурси або додавати нові.</p>
+        
+        <p><strong>2. Зареєстрований користувач (User)</strong><br>
+        Має всі можливості незареєстрованого користувача, а також може:</p>
+        <ul>
+            <li>створювати персональні дошки (boards)</li>
+            <li>зберігати ресурси у свої колекції</li>
+            <li>пропонувати нові ресурси для додавання до платформи</li>
+        </ul>
+
+        <p><strong>3. Адміністратор (Admin)</strong><br>
+        Має повний доступ до системи. Його функції включають управління каталогом, модерацію ресурсів, редагування/видалення контенту та управління користувачами.</p>
+
+        <h3>2.3 ЗОВНІШНІ ЗАЛЕЖНОСТІ</h3>
+        <ul>
+            <li>Social Media APIs (Instagram, TikTok, YouTube): Отримання метрик та статистики.</li>
+            <li>Cloud Storage: Зберігання зображень та медіа-файлів портфоліо.</li>
+            <li>Auth Services (Google Auth): Швидка авторизація користувачів.</li>
+            <li>Database (PostgreSQL/MongoDB): Зберігання профілів та історії угод.</li>
+        </ul>
+    </section>
+
+    <section id="section3">
+        <h2>3. ФУНКЦІОНАЛЬНІ ВИМОГИ (FUNCTIONAL REQUIREMENTS)</h2>
+        <table class="data-table">
+            <thead>
+                <tr><th>ID</th><th>Priority</th><th>Task</th><th>Requirement</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>FR-01</td><td>High</td><td>Перегляд каталогу креаторів</td><td>Система повинна дозволяти користувачам переглядати каталог креаторів у вигляді списку або сітки профілів.</td></tr>
+                <tr><td>FR-02</td><td>High</td><td>Перегляд профілю креатора</td><td>Система повинна дозволяти користувачам відкривати сторінку профілю креатора з інформацією про нього.</td></tr>
+                <tr><td>FR-03</td><td>High</td><td>Перегляд портфоліо</td><td>Система повинна дозволяти користувачам переглядати портфоліо робіт конкретного креатора.</td></tr>
+                <tr><td>FR-04</td><td>High</td><td>Детальна сторінка роботи</td><td>Система повинна дозволяти відкривати сторінку конкретної роботи з описом та зображеннями.</td></tr>
+                <tr><td>FR-05</td><td>High</td><td>Пошук креаторів</td><td>Система повинна надавати можливість пошуку креаторів за ключовими словами.</td></tr>
+                <tr><td>FR-06</td><td>High</td><td>Пошук робіт</td><td>Система повинна дозволяти користувачам знаходити роботи у портфоліо за ключовими словами.</td></tr>
+                <tr><td>FR-07</td><td>High</td><td>Фільтрація контенту</td><td>Система повинна дозволяти фільтрувати результати за категоріями, тегами або іншими параметрами.</td></tr>
+                <tr><td>FR-08</td><td>High</td><td>Реєстрація користувача</td><td>Система повинна дозволяти новим користувачам створювати обліковий запис.</td></tr>
+                <tr><td>FR-09</td><td>High</td><td>Авторизація користувача</td><td>Система повинна забезпечувати функцію входу для зареєстрованих користувачів.</td></tr>
+                <tr><td>FR-10</td><td>Medium</td><td>Вихід з системи</td><td>Система повинна дозволяти користувачам виходити зі свого облікового запису.</td></tr>
+                <tr><td>FR-11</td><td>Medium</td><td>Редагування профілю</td><td>Система повинна дозволяти змінювати інформацію власного профілю.</td></tr>
+                <tr><td>FR-12</td><td>Medium</td><td>Додавання робіт</td><td>Система повинна дозволяти креаторам додавати нові роботи до свого портфоліо.</td></tr>
+                <tr><td>FR-13</td><td>Medium</td><td>Редагування робіт</td><td>Система повинна дозволяти креаторам редагувати інформацію про свої роботи.</td></tr>
+                <tr><td>FR-14</td><td>Medium</td><td>Видалення робіт</td><td>Система повинна дозволяти креаторам видаляти роботи зі свого портфоліо.</td></tr>
+                <tr><td>FR-15</td><td>Medium</td><td>Завантаження зображень</td><td>Система повинна дозволяти завантажувати зображення для робіт у портфоліо.</td></tr>
+                <tr><td>FR-16</td><td>High</td><td>Адміністративна панель</td><td>Система повинна надавати адміністраторам доступ до адмін-панелі.</td></tr>
+                <tr><td>FR-17</td><td>High</td><td>Управління користувачами</td><td>Адміністратори можуть переглядати, редагувати або блокувати акаунти.</td></tr>
+                <tr><td>FR-18</td><td>High</td><td>Управління контентом</td><td>Адміністратори можуть додавати/редагувати/видаляти інформацію про креаторів.</td></tr>
+                <tr><td>FR-19</td><td>Medium</td><td>Модерація контенту</td><td>Адміністратори можуть перевіряти та модерувати контент користувачів.</td></tr>
+                <tr><td>FR-20</td><td>Low</td><td>Перегляд статистики</td><td>Система повинна надавати адміністраторам базову статистику використання.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="section4">
+    <h2>4. НЕФУНКЦІОНАЛЬНІ ВИМОГИ (NON-FUNCTIONAL REQUIREMENTS)</h2>
+    
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th style="width: 30%; text-align: center;">ID</th>
+                <th style="text-align: center;">Requirement</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th colspan="2" style="text-align: center; background-color: #f9f9f9; color: #333;">Performance</th>
+            </tr>
+            <tr>
+                <td style="text-align: center;">NFR-P-01</td>
+                <td>Час завантаження сторінки ≤ 3 секунди</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">NFR-P-02</td>
+                <td>Система підтримує ≥1000 користувачів</td>
+            </tr>
+
+            <tr>
+                <th colspan="2" style="text-align: center; background-color: #f9f9f9; color: #333;">Security</th>
+            </tr>
+            <tr>
+                <td style="text-align: center;">NFR-S-01</td>
+                <td>Використання HTTPS</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">NFR-S-02</td>
+                <td>Захист персональних даних користувачів</td>
+            </tr>
+
+            <tr>
+                <th colspan="2" style="text-align: center; background-color: #f9f9f9; color: #333;">Usability</th>
+            </tr>
+            <tr>
+                <td style="text-align: center;">NFR-U-01</td>
+                <td>Адаптивний дизайн для мобільних пристроїв</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">NFR-U-02</td>
+                <td>Простий та зрозумілий інтерфейс</td>
+            </tr>
+
+            <tr>
+                <th colspan="2" style="text-align: center; background-color: #f9f9f9; color: #333;">Reliability</th>
+            </tr>
+            <tr>
+                <td style="text-align: center;">NFR-R-01</td>
+                <td>Uptime не менше 99%</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">NFR-R-02</td>
+                <td>Резервне копіювання бази даних кожні 24 години</td>
+            </tr>
+
+            <tr>
+                <th colspan="2" style="text-align: center; background-color: #f9f9f9; color: #333;">Reliability</th>
+            </tr>
+            <tr>
+                <td style="text-align: center;">NFR-R-01</td>
+                <td>Uptime не менше 99%</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">NFR-R-02</td>
+                <td>Резервне копіювання бази даних кожні 24 години</td>
+            </tr>
+
+            <tr>
+                <th colspan="2" style="text-align: center; background-color: #f9f9f9; color: #333;">Scalability</th>
+            </tr>
+            <tr>
+                <td style="text-align: center;">NFR-SC-01</td>
+                <td>Підтримка масштабування серверів</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">NFR-SC-02</td>
+                <td>Можливість додавання нових профілів без втрати продуктивності</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section id="section5">
+    <h2>5 ОБМЕЖЕННЯ (CONSTRAINTS)</h2>
+    <p>Цей розділ описує технічні, часові, юридичні та інші обмеження, які можуть впливати на розробку та функціонування системи.</p>
+    
+    <table class="data-table">
+        <tr>
+            <th colspan="2" style="text-align: center; background-color: #f9f9f9; color: #333;">Технологічні обмеження</th>
+        </tr>
+        <tr>
+            <td style="width: 60px; text-align: center;">C-01</td>
+            <td>Використання сучасних веб-технологій, що забезпечують швидке завантаження сторінок та карток ресурсів.</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">C-02</td>
+            <td>Підтримка інтеграції з зовнішніми сервісами зберігання даних і зображень (CDN, cloud storage).</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">C-03</td>
+            <td>Оптимізація завантаження зображень для каталогу ресурсів, щоб забезпечити швидку роботу системи навіть при великій кількості медіафайлів.</td>
+        </tr>
+
+        <tr>
+            <th colspan="2" style="text-align: center; background-color: #f9f9f9; color: #333;">Обмеження за часом реалізації</th>
+        </tr>
+        <tr>
+            <td style="text-align: center;">C-04</td>
+            <td>MVP (мінімально життєздатний продукт) повинен бути реалізований протягом двох місяців.</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">C-05</td>
+            <td>У першій версії повинні бути реалізовані лише основні функції платформи (каталог, пошук, фільтри, персональні дошки, авторизація).</td>
+        </tr>
+
+        <tr>
+            <th colspan="2" style="text-align: center; background-color: #f9f9f9; color: #333;">Фінансові обмеження</th>
+        </tr>
+        <tr>
+            <td style="text-align: center;">C-06</td>
+            <td>Бюджет проєкту формується після реалізації MVP, тому необхідно використовувати оптимальні технічні рішення.</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">C-07</td>
+            <td>Всі сторонні сервіси (CDN, cloud storage) повинні мати безкоштовний або недорогий тариф на старті проєкту.</td>
+        </tr>
+
+        <tr>
+            <th colspan="2" style="text-align: center; background-color: #f9f9f9; color: #333;">Правові обмеження</th>
+        </tr>
+        <tr>
+            <td style="text-align: center;">C-08</td>
+            <td>Контент на платформі повинен відповідати авторським правам (не порушувати copyright сторонніх ресурсів).</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">C-09</td>
+            <td>Захист персональних даних користувачів має відповідати нормам GDPR.</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">C-10</td>
+            <td>Всі форми та дані, що збираються від користувачів, повинні мати чіткі політики конфіденційності.</td>
+        </tr>
+
+        <tr>
+            <th colspan="2" style="text-align: center; background-color: #f9f9f9; color: #333;">Інфраструктурні обмеження</th>
+        </tr>
+        <tr>
+            <td style="text-align: center;">C-11</td>
+            <td>Система залежить від стабільності зовнішніх сервісів зберігання даних та хостингу зображень.</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">C-12</td>
+            <td>Платформа повинна коректно працювати на мобільних пристроях та десктопах (Mobile-first та Desktop).</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">C-13</td>
+            <td>Максимальна кількість одночасних користувачів у MVP — ~400 сесій, що впливає на вибір серверного рішення.</td>
+        </tr>
+    </table>
+</section>
+
+    <section id="section6">
+    <h2>6. ГЛОСАРІЙ (GLOSSARY)</h2>
+    
+    <table class="data-table glossary-table">
+        <thead>
+            <tr>
+                <th style="width: 40%; background-color: #6e8efb; color: white; text-align: center; border: 1px solid #ddd;">Термін</th>
+                <th style="background-color: #6e8efb; color: white; text-align: center; border: 1px solid #ddd;">Опис</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Creator</td>
+                <td>користувач, який публікує свої роботи</td>
+            </tr>
+            <tr>
+                <td>Portfolio</td>
+                <td>набір робіт автора</td>
+            </tr>
+            <tr>
+                <td>Profile</td>
+                <td>сторінка з інформацією про автора</td>
+            </tr>
+            <tr>
+                <td>Admin</td>
+                <td>користувач з правами управління системою</td>
+            </tr>
+            <tr>
+                <td>MVP</td>
+                <td>мінімальна версія продукту</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section id="section7">
+        <h2>7. МАТРИЦЯ ВІДСТЕЖУВАНОСТІ (TRACEABILITY MATRIX)</h2>
+        <table class="data-table">
+            <thead>
+                <tr><th>Requirement</th><th>Source</th><th>Test</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>FR-01</td><td>Основна функція платформи</td><td>Відображення каталогу</td></tr>
+                <tr><td>FR-02</td><td>Перегляд профілю</td><td>Відкриття сторінки</td></tr>
+                <tr><td>FR-06</td><td>Пошук</td><td>Пошук креатора</td></tr>
+                <tr><td>FR-08</td><td>Додавання робіт</td><td>Додавання файлу</td></tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+
+</body>
+</html>
