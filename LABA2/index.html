@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creators Catalog — Проєктна документація</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <header class="project-header shadow-lg">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-2">Creators Catalog Platform</h1>
+            <p class="text-indigo-100 text-lg">Проєктна документація: Аналіз та Проєктування</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 max-w-5xl">
+
+        <section class="mb-16">
+            <div class="table-container">
+                <section class="mb-16">
+    <div class="section-title">
+        <i class="fas fa-list-check text-indigo-600"></i>
+        <h2>Функціональні вимоги</h2>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Пріоритет</th>
+                    <th>Назва вимоги</th>
+                    <th>Опис вимоги (Критерії перевірки)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="id-cell">FR-01</td>
+                    <td><span class="badge high">High</span></td>
+                    <td>Пошук креаторів</td>
+                    <td>Система повинна повертати список профілів креаторів, що відповідають введеному текстовому запиту користувача, протягом не більше 2 секунд.</td>
+                </tr>
+                <tr>
+                    <td class="id-cell">FR-02</td>
+                    <td><span class="badge high">High</span></td>
+                    <td>Фільтрація результатів</td>
+                    <td>Система повинна відображати лише ті профілі або роботи, які відповідають вибраним користувачем параметрам (категорія, теги, рейтинг).</td>
+                </tr>
+                <tr>
+                    <td class="id-cell">FR-03</td>
+                    <td><span class="badge high">High</span></td>
+                    <td>Реєстрація облікового запису</td>
+                    <td>Система повинна створювати новий запис користувача в базі даних після заповнення форми (email, пароль, ім'я) та підтвердження унікальності email.</td>
+                </tr>
+                <tr>
+                    <td class="id-cell">FR-04</td>
+                    <td><span class="badge high">High</span></td>
+                    <td>Авторизація користувача</td>
+                    <td>Система повинна надавати доступ до закритих функцій профілю після введення коректної пари логін/пароль та видавати токен сесії.</td>
+                </tr>
+                <tr>
+                    <td class="id-cell">FR-05</td>
+                    <td><span class="badge medium">Medium</span></td>
+                    <td>Додавання робіт до портфоліо</td>
+                    <td>Система повинна дозволяти авторизованому креатору завантажувати медіа-файл (JPG/PNG) з обов’язковим заповненням полів "Назва" та "Опис".</td>
+                </tr>
+                <tr>
+                    <td class="id-cell">FR-06</td>
+                    <td><span class="badge high">High</span></td>
+                    <td>Блокування користувачів</td>
+                    <td>Система повинна дозволяти адміністратору змінювати статус облікового запису на "Заблокований", що миттєво припиняє доступ користувача до системи.</td>
+                </tr>
+                <tr>
+                    <td class="id-cell">FR-07</td>
+                    <td><span class="badge medium">Medium</span></td>
+                    <td>Редагування контенту</td>
+                    <td>Система повинна зберігати зміни в описі або зображеннях роботи після натискання кнопки "Зберегти" та відображати оновлені дані в публічному профілі.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+            </div>
+        </section>
+
+        <div class="space-y-12">
+            
+            <article class="diagram-card">
+    <h3>1. Діаграма прецедентів (Use Case Diagram)</h3>
+    <div class="diagram-wrapper">
+        <img src="img/diag1.jpg" alt="Діаграма прецедентів системи пошуку креаторів">
+    </div>
+    <details>
+        <summary>Переглянути PlantUML код</summary>
+        <pre><code>@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Користувач" as User
+actor "Креатор" as Creator
+actor "Адміністратор" as Admin
+
+' Наслідування акторів
+User <|-- Creator
+User <|-- Admin
+
+rectangle "Система пошуку креаторів" {
+    ' Основні прецеденти для Користувача
+    User --> (Реєстрація)
+    User --> (Авторизація)
+    User --> (Пошук креаторів)
+    
+    ' Прецеденти для Креатора
+    Creator --> (Додавання робіт)
+    Creator --> (Редагування контенту)
+    
+    ' Прецеденти для Адміна
+    Admin --> (Блокування користувача)
+
+    ' Зв'язки Include (Включення)
+    (Пошук креаторів) ..> (Фільтрація результатів) : <<include>>
+    (Авторизація) ..> (Перевірка даних) : <<include>>
+    (Реєстрація) ..> (Перевірка унікальності email) : <<include>>
+    (Редагування контенту) ..> (Збереження змін) : <<include>>
+
+    ' Зв'язок Extend (Розширення)
+    (Блокування користувача) ..> (Авторизація) : <<extend>>
+}
+@enduml</code></pre>
+    </details>
+</article>
+
+            <article class="diagram-card">
+    <h3>2. Діаграма класів (Class Diagram)</h3>
+    <div class="diagram-wrapper">
+        <img src="img/diag2.jpg" alt="Діаграма класів системи Creators Catalog">
+    </div>
+    <details>
+        <summary>Переглянути PlantUML код</summary>
+        <pre><code>@startuml
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam shadowing false
+
+' Базовий клас
+class User {
+  - id: Integer
+  - username: String
+  - email: String
+  - passwordHash: String
+  + register(): Boolean
+  + login(): Boolean
+  + logout(): void
+  + createBoard(name: String): Board
+}
+
+' Наслідування (Спадкоємці)
+class Creator {
+  - isVerified: Boolean
+  + addWork(w: Work): void
+  + editWork(workId: Integer): void
+  + deleteWork(workId: Integer): void
+}
+
+class Admin {
+  - adminLevel: Integer
+  + blockUser(userId: Integer): void
+  + moderateContent(workId: Integer): Boolean
+  + viewStatistics(): String
+}
+
+' Компоненти системи
+class Profile {
+  - profileId: Integer
+  - description: String
+  - skills: List<String>
+  - contactData: String
+  + updateProfile(newData: String): Boolean
+  + getDetails(): String
+}
+
+class Portfolio {
+  - portfolioId: Integer
+  - totalViews: Integer
+  + getWorks(): List<Work>
+}
+
+class Work {
+  - workId: Integer
+  - title: String
+  - description: String
+  - imageUrl: String
+  - tags: List<String>
+  + getDetails(): String
+  + updateInfo(data: String): void
+}
+
+class Board {
+  - boardId: Integer
+  - name: String
+  - createdAt: Date
+  + addResource(work: Work): void
+  + removeResource(workId: Integer): void
+}
+
+' Зв'язки (Relationships) та їх кратність
+
+' Наслідування
+User <|-- Creator : Наслідування
+User <|-- Admin : Наслідування
+
+' Композиція (сувора залежність, частина не існує без цілого)
+Creator "1" *-- "1" Profile : Композиція
+Creator "1" *-- "1" Portfolio : Композиція
+User "1" *-- "0..*" Board : Композиція (Користувач має дошки)
+
+' Агрегація (слабка залежність, елементи можуть існувати окремо)
+Portfolio "1" o-- "0..*" Work : Агрегація (Портфоліо містить роботи)
+Board "0..*" o-- "0..*" Work : Агрегація (Дошка зберігає роботи)
+
+@enduml</code></pre>
+    </details>
+<article class="diagram-card">
+    <h3>3. Діаграма послідовності (Sequence Diagram)</h3>
+    <div class="diagram-wrapper">
+        <img src="img/diag3.jpg" alt="Діаграма послідовності: Додавання роботи до портфоліо">
+    </div>
+    <details>
+        <summary>Переглянути PlantUML код</summary>
+        <pre><code>@startuml
+title Діаграма послідовності: Додавання роботи до портфоліо (FR-05)
+
+actor Creator as "Креатор"
+participant UI as "Інтерфейс користувача"
+participant Auth as "Сервіс авторизації"
+participant PC as "PortfolioController"
+database DB as "База даних"
+
+autonumber
+
+Creator -> UI : Натиснути "Додати роботу"
+activate UI
+
+UI -> Creator : Відобразити форму (файл, назва, опис)
+Creator -> UI : Заповнити дані та натиснути "Зберегти"
+
+UI -> Auth : Перевірити сесію (token)
+activate Auth
+Auth --> UI : Сесія активна
+deactivate Auth
+
+UI -> PC : uploadWork(workData)
+activate PC
+
+PC -> PC : Валідація даних (розмір файлу, тип)
+
+alt #LightGreen Дані коректні
+    PC -> DB : saveNewWork(CreatorID, Data)
+    activate DB
+    DB --> PC : WorkID, SuccessStatus
+    deactivate DB
+    
+    PC --> UI : confirmSuccess()
+    UI --> Creator : Повідомлення "Роботу успішно додано"
+else #Pink Помилка валідації або доступу
+    PC --> UI : errorResponse(errorMessage)
+    deactivate PC
+    UI --> Creator : Повідомлення про помилку
+end
+
+deactivate UI
+@enduml</code></pre>
+    </details>
+</article>
+
+        </div>
+    </main>
+<section class="mb-16">
+    <div class="section-title">
+        <div class="icon-circle shadow-sm">
+            <i class="fas fa-link text-indigo-600"></i>
+        </div>
+        <h2 class="text-xl font-bold ml-3 text-gray-800">Матриця трасовності вимог проєкту</h2>
+    </div>
+
+    <div class="table-container shadow-sm border border-gray-100 rounded-xl overflow-hidden bg-white">
+        <table class="w-full text-left">
+            <thead class="bg-gray-50/50 border-b border-gray-100">
+                <tr>
+                    <th class="p-4 text-indigo-600 font-semibold text-sm uppercase tracking-wider">ID вимоги</th>
+                    <th class="p-4 text-indigo-600 font-semibold text-sm uppercase tracking-wider">Назва функціональної вимоги</th>
+                    <th class="p-4 text-indigo-600 font-semibold text-sm uppercase tracking-wider text-center">Прецедент (Use Case)</th>
+                    <th class="p-4 text-indigo-600 font-semibold text-sm uppercase tracking-wider text-center">Класи (Class Diagram)</th>
+                    <th class="p-4 text-indigo-600 font-semibold text-sm uppercase tracking-wider text-center">Діаграма послідовності</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+                <tr class="hover:bg-indigo-50/30 transition-colors">
+                    <td class="p-4 font-mono text-xs text-indigo-500 font-bold">FR-01</td>
+                    <td class="p-4 text-sm font-medium text-gray-700">Пошук креаторів</td>
+                    <td class="p-4 text-sm text-gray-600 text-center">Пошук креаторів</td>
+                    <td class="p-4 text-sm text-gray-600 text-center italic">User, Creator, Category</td>
+                    <td class="p-4 text-sm text-gray-400 text-center">—</td>
+                </tr>
+                <tr class="hover:bg-indigo-50/30 transition-colors">
+                    <td class="p-4 font-mono text-xs text-indigo-500 font-bold">FR-02</td>
+                    <td class="p-4 text-sm font-medium text-gray-700">Авторизація</td>
+                    <td class="p-4 text-sm text-gray-600 text-center">Авторизація</td>
+                    <td class="p-4 text-sm text-gray-600 text-center italic">User</td>
+                    <td class="p-4 text-sm text-gray-400 text-center">—</td>
+                </tr>
+                <tr class="hover:bg-indigo-50/30 transition-colors bg-indigo-50/10">
+                    <td class="p-4 font-mono text-xs text-indigo-500 font-bold">FR-03</td>
+                    <td class="p-4 text-sm font-medium text-gray-700">Додавання роботи</td>
+                    <td class="p-4 text-sm text-gray-600 text-center">Додавання робіт</td>
+                    <td class="p-4 text-sm text-gray-600 text-center italic">Creator, Work, Portfolio</td>
+                    <td class="p-4 text-sm text-indigo-600 font-semibold text-center">Сценарій "Додавання роботи"</td>
+                </tr>
+                <tr class="hover:bg-indigo-50/30 transition-colors">
+                    <td class="p-4 font-mono text-xs text-indigo-500 font-bold">FR-04</td>
+                    <td class="p-4 text-sm font-medium text-gray-700">Перегляд портфоліо</td>
+                    <td class="p-4 text-sm text-gray-600 text-center">Перегляд портфоліо</td>
+                    <td class="p-4 text-sm text-gray-600 text-center italic">Portfolio, Work</td>
+                    <td class="p-4 text-sm text-gray-400 text-center">—</td>
+                </tr>
+                <tr class="hover:bg-indigo-50/30 transition-colors">
+                    <td class="p-4 font-mono text-xs text-indigo-500 font-bold">FR-05</td>
+                    <td class="p-4 text-sm font-medium text-gray-700">Редагування профілю</td>
+                    <td class="p-4 text-sm text-gray-600 text-center">Редагування контенту</td>
+                    <td class="p-4 text-sm text-gray-600 text-center italic">Creator</td>
+                    <td class="p-4 text-sm text-gray-400 text-center">—</td>
+                </tr>
+                <tr class="hover:bg-indigo-50/30 transition-colors">
+                    <td class="p-4 font-mono text-xs text-indigo-500 font-bold">FR-06</td>
+                    <td class="p-4 text-sm font-medium text-gray-700">Модерація контенту</td>
+                    <td class="p-4 text-sm text-gray-600 text-center">Блокування користувача</td>
+                    <td class="p-4 text-sm text-gray-600 text-center italic">Admin, User, Work</td>
+                    <td class="p-4 text-sm text-gray-400 text-center">—</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+    <footer class="text-center py-10 text-gray-500 border-t mt-10">
+        <p>&copy; 2026 ХНУРЕ. Студентки: Євсович Анна, Мізина Софія, Яцюк Єлизавета ПЗПІ-25-01</p>
+        <p>Над діаграммами працювали всі</p>
+    </footer>
+
+</body>
+</html>
