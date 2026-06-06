@@ -8,7 +8,7 @@ import java.util.List;
  * Відповідає класу Work з UML-діаграми класів ЛР 02.
  */
 public class Work {
-    private int workId;
+    private final int workId;
     private String title;
     private String description;
     private String imageUrl;

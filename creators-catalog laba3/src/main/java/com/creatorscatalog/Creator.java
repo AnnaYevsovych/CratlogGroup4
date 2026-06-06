@@ -20,6 +20,7 @@ public class Creator {
 
     private static final int MIN_PASSWORD_LENGTH = 8;
     private static final String EMAIL_REGEX = "^[\\w.+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$";
+    private static final java.util.regex.Pattern EMAIL_PATTERN = java.util.regex.Pattern.compile(EMAIL_REGEX);
 
     public Creator(int id, String username, String email, String password) {
         if (id <= 0) {
@@ -29,6 +30,9 @@ public class Creator {
         validatePassword(password);
 
         this.id = id;
+        if (username == null || username.isBlank()) {
+            throw new IllegalArgumentException("Username не може бути порожнім");
+        }
         this.username = username;
         this.email = email.trim().toLowerCase();
         this.passwordHash = hashPassword(password);
@@ -134,7 +138,7 @@ public class Creator {
     // --- Приватні допоміжні методи ---
 
     private void validateEmail(String email) {
-        if (email == null || !email.trim().matches(EMAIL_REGEX)) {
+        if (email == null || !EMAIL_PATTERN.matcher(email.trim()).matches()) {
             throw new IllegalArgumentException("Некоректний формат email: " + email);
         }
     }
